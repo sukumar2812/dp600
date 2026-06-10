@@ -1457,6 +1457,63 @@
             "value": "False"
           }
         ]
+      },
+      {
+        "name": "vw_sales",
+        "sourceLineageTag": "[dbo].[vw_sales]",
+        "columns": [
+          {
+            "name": "QTY",
+            "dataType": "int64",
+            "sourceColumn": "QTY",
+            "formatString": "0",
+            "sourceProviderType": "bigint",
+            "sourceLineageTag": "QTY",
+            "summarizeBy": "sum",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "NP",
+            "dataType": "double",
+            "sourceColumn": "NP",
+            "sourceProviderType": "float",
+            "sourceLineageTag": "NP",
+            "summarizeBy": "sum",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ]
+          }
+        ],
+        "partitions": [
+          {
+            "name": "{{Partition_Name}}",
+            "mode": "directLake",
+            "source": {
+              "type": "entity",
+              "entityName": "vw_sales",
+              "expressionSource": "DatabaseQuery",
+              "schemaName": "dbo"
+            }
+          }
+        ],
+        "annotations": [
+          {
+            "name": "IsTableInBiModel",
+            "value": "False"
+          }
+        ]
       }
     ],
     "expressions": [
