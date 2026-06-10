@@ -1,0 +1,158 @@
+table Sales
+	lineageTag: 2ee2cd30-34e7-499e-8009-0103e873faf0
+	sourceLineageTag: [dbo].[Sales]
+
+	column 'Order Number'
+		dataType: int64
+		formatString: 0
+		sourceProviderType: bigint
+		lineageTag: 2b723b86-cc71-423a-8e03-e68923aca303
+		sourceLineageTag: Order Number
+		summarizeBy: sum
+		sourceColumn: Order Number
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Line Number'
+		dataType: int64
+		formatString: 0
+		sourceProviderType: bigint
+		lineageTag: 80c2f6fd-08ee-4786-bd93-679e16682c3e
+		sourceLineageTag: Line Number
+		summarizeBy: sum
+		sourceColumn: Line Number
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Order Date'
+		dataType: dateTime
+		formatString: General Date
+		sourceProviderType: date
+		lineageTag: c011614d-73db-439b-a5a4-d94851c9d99a
+		sourceLineageTag: Order Date
+		summarizeBy: none
+		sourceColumn: Order Date
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Delivery Date'
+		dataType: dateTime
+		formatString: General Date
+		sourceProviderType: date
+		lineageTag: 95bd936f-ae5d-4ecb-8691-ed5f7c90ae0a
+		sourceLineageTag: Delivery Date
+		summarizeBy: none
+		sourceColumn: Delivery Date
+
+		annotation SummarizationSetBy = Automatic
+
+	column CustomerKey
+		dataType: int64
+		formatString: 0
+		sourceProviderType: bigint
+		lineageTag: 1f405b88-fdc2-4f4e-9977-c32c57ab21f5
+		sourceLineageTag: CustomerKey
+		summarizeBy: none
+		sourceColumn: CustomerKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column StoreKey
+		dataType: int64
+		formatString: 0
+		sourceProviderType: bigint
+		lineageTag: a0a61dc8-c06b-4005-a81c-0b202d0bd949
+		sourceLineageTag: StoreKey
+		summarizeBy: none
+		sourceColumn: StoreKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column ProductKey
+		dataType: int64
+		formatString: 0
+		sourceProviderType: bigint
+		lineageTag: 55a59c7e-7d06-4869-ac91-c9c3a8870474
+		sourceLineageTag: ProductKey
+		summarizeBy: none
+		sourceColumn: ProductKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column Quantity
+		dataType: int64
+		formatString: 0
+		sourceProviderType: bigint
+		lineageTag: 74200b66-b2c7-40f4-97d8-a67ff31b6ce8
+		sourceLineageTag: Quantity
+		summarizeBy: sum
+		sourceColumn: Quantity
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Unit Price'
+		dataType: double
+		sourceProviderType: float
+		lineageTag: aa380f14-02e3-437b-b104-37095906d86f
+		sourceLineageTag: Unit Price
+		summarizeBy: sum
+		sourceColumn: Unit Price
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Net Price'
+		dataType: double
+		sourceProviderType: float
+		lineageTag: 5ee5690e-48f4-4347-b273-f005c23499da
+		sourceLineageTag: Net Price
+		summarizeBy: sum
+		sourceColumn: Net Price
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Unit Cost'
+		dataType: double
+		sourceProviderType: float
+		lineageTag: 980f57f1-4b31-4639-9d3e-b56ae905df34
+		sourceLineageTag: Unit Cost
+		summarizeBy: sum
+		sourceColumn: Unit Cost
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Currency Code'
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: fcb9f94e-5065-4485-9ccc-731cd929445a
+		sourceLineageTag: Currency Code
+		summarizeBy: none
+		sourceColumn: Currency Code
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Exchange Rate'
+		dataType: int64
+		formatString: 0
+		sourceProviderType: bigint
+		lineageTag: a18654c6-ef22-4956-b2ec-f0cb606b4273
+		sourceLineageTag: Exchange Rate
+		summarizeBy: sum
+		sourceColumn: Exchange Rate
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Sales = entity
+		mode: directLake
+		source
+			entityName: Sales
+			schemaName: dbo
+			expressionSource: DatabaseQuery
+
+	annotation PBI_ResultType = Table
+

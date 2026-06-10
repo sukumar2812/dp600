@@ -1,0 +1,145 @@
+table Product
+	lineageTag: b5a63de5-54d4-4359-861f-0777f3366b9a
+	sourceLineageTag: [dbo].[Product]
+
+	column ProductKey
+		dataType: int64
+		formatString: 0
+		lineageTag: 0876728d-ced1-41bc-8776-b4e55e73dfb3
+		sourceLineageTag: ProductKey
+		summarizeBy: none
+		sourceColumn: ProductKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Product Code'
+		dataType: int64
+		formatString: 0
+		lineageTag: 470576a3-ae49-44b5-8814-c355de450af3
+		sourceLineageTag: Product Code
+		summarizeBy: none
+		sourceColumn: Product Code
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Product Name'
+		dataType: string
+		lineageTag: d552fe27-7761-45ff-a888-40d32812fd08
+		sourceLineageTag: Product Name
+		summarizeBy: none
+		sourceColumn: Product Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column Manufacturer
+		dataType: string
+		lineageTag: aa2f54ba-ce44-4300-8d59-e756c52ac588
+		sourceLineageTag: Manufacturer
+		summarizeBy: none
+		sourceColumn: Manufacturer
+
+		annotation SummarizationSetBy = Automatic
+
+	column Brand
+		dataType: string
+		lineageTag: 5dc36727-495a-4754-b414-1e4ab48e4328
+		sourceLineageTag: Brand
+		summarizeBy: none
+		sourceColumn: Brand
+
+		annotation SummarizationSetBy = Automatic
+
+	column Color
+		dataType: string
+		lineageTag: 8d288067-4ad8-40ae-b571-6dd80fca3582
+		sourceLineageTag: Color
+		summarizeBy: none
+		sourceColumn: Color
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Weight Unit Measure'
+		dataType: string
+		lineageTag: 6edea8e6-d35d-4e60-915d-b19c0f9a9354
+		sourceLineageTag: Weight Unit Measure
+		summarizeBy: none
+		sourceColumn: Weight Unit Measure
+
+		annotation SummarizationSetBy = Automatic
+
+	column Weight
+		dataType: string
+		lineageTag: 4abacca0-3ac9-4ed2-8adc-94fa52a4b522
+		sourceLineageTag: Weight
+		summarizeBy: none
+		sourceColumn: Weight
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Unit Cost'
+		dataType: double
+		lineageTag: 51dfcd4c-f06b-4e5f-9d01-8809068c3580
+		sourceLineageTag: Unit Cost
+		summarizeBy: none
+		sourceColumn: Unit Cost
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Unit Price'
+		dataType: double
+		lineageTag: 21667f23-f022-4a9f-b3da-a675201aca01
+		sourceLineageTag: Unit Price
+		summarizeBy: none
+		sourceColumn: Unit Price
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Subcategory Code'
+		dataType: int64
+		formatString: 0
+		lineageTag: 56fdab1d-aae9-4a94-97cf-283453c9a96b
+		sourceLineageTag: Subcategory Code
+		summarizeBy: none
+		sourceColumn: Subcategory Code
+
+		annotation SummarizationSetBy = Automatic
+
+	column Subcategory
+		dataType: string
+		lineageTag: 8f227628-0a3a-4309-8f0f-3cbe7361554f
+		sourceLineageTag: Subcategory
+		summarizeBy: none
+		sourceColumn: Subcategory
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Category Code'
+		dataType: int64
+		formatString: 0
+		lineageTag: 1c134a52-2072-4a6f-82d5-55399883fa60
+		sourceLineageTag: Category Code
+		summarizeBy: none
+		sourceColumn: Category Code
+
+		annotation SummarizationSetBy = Automatic
+
+	column Category
+		dataType: string
+		lineageTag: b11be057-a34a-4edc-92c4-d2b2e9ce4d66
+		sourceLineageTag: Category
+		summarizeBy: none
+		sourceColumn: Category
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Product = entity
+		mode: directLake
+		source
+			entityName: Product
+			schemaName: dbo
+			expressionSource: 'DirectLake - WH01'
+

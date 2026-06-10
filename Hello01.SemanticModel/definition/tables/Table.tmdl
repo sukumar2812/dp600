@@ -1,0 +1,54 @@
+table Table
+	lineageTag: d802f604-ec64-403e-b609-96cd61fc19e3
+
+	column From
+		dataType: string
+		lineageTag: 1c518985-c4c0-4a2e-b1fa-f521f7784c27
+		summarizeBy: none
+		sourceColumn: From
+
+		annotation SummarizationSetBy = Automatic
+
+	column To
+		dataType: string
+		lineageTag: 99d9f30d-6dec-4d95-92fe-63ee30eafd9e
+		summarizeBy: none
+		sourceColumn: To
+
+		annotation SummarizationSetBy = Automatic
+
+	column Date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 8477c7c7-bb6e-4d19-a7e3-f58d588c12fc
+		summarizeBy: none
+		sourceColumn: Date
+
+		variation Variation
+			isDefault
+			relationship: bcef69a4-aff8-4a86-ac2c-410984df5f63
+			defaultHierarchy: LocalDateTable_fbb04e3c-bba1-480a-b77f-4a1cb68a92e2.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Rate
+		dataType: double
+		lineageTag: 3eadbb1b-890c-411a-b770-18d1ac27457e
+		summarizeBy: sum
+		sourceColumn: Rate
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition Table = m
+		mode: import
+		source =
+				let
+				  Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i45W8vQLUtJRCg12AZIGhrpeiXm6RmYgtp6xubmpsZmJhbFSrA6aOiNkdYYmFubm5gZmWNQZI6szMTcxNDE2szTEVGeCrM7A1NTczNzY0kwpNhYA", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [From = _t, To = _t, Date = _t, Rate = _t]),
+				  #"Changed column type" = Table.TransformColumnTypes(Source, {{"From", type text}, {"To", type text}, {"Date", type date}, {"Rate", type number}})
+				in
+				  #"Changed column type"
+

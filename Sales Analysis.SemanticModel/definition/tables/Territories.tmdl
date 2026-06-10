@@ -1,0 +1,63 @@
+table Territories
+	lineageTag: b4ff1cbb-1743-4340-82da-d42ce8c1f972
+
+	column SalesTerritoryKey
+		dataType: int64
+		formatString: 0
+		lineageTag: 584db9b2-d8a2-4655-9b8c-a564c8468346
+		summarizeBy: none
+		sourceColumn: SalesTerritoryKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column Region
+		dataType: string
+		lineageTag: 45aac31f-b761-4cb3-bf85-482092067794
+		summarizeBy: none
+		sourceColumn: Region
+
+		annotation SummarizationSetBy = Automatic
+
+	column Country
+		dataType: string
+		lineageTag: a8046767-6e0f-4994-aca4-bd5f8ccdc706
+		summarizeBy: none
+		sourceColumn: Country
+
+		annotation SummarizationSetBy = Automatic
+
+	column Group
+		dataType: string
+		lineageTag: 8a1e78db-4259-4c71-bdc6-e39f693ae124
+		summarizeBy: none
+		sourceColumn: Group
+
+		annotation SummarizationSetBy = Automatic
+
+	column RegionImage
+		dataType: string
+		lineageTag: e064079c-4984-4250-80bc-f0671f351e2b
+		summarizeBy: none
+		sourceColumn: RegionImage
+
+		annotation SummarizationSetBy = Automatic
+
+	column RegionCountry = Territories[Region]&Territories[Country]
+		lineageTag: 6f501c9e-b9ea-4c9c-906b-5ae164be3583
+		summarizeBy: none
+		expressionContext: userContext
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Territories-c8b9bbd5-c69e-4e57-8a5b-464f66d82ee5 = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Users\Sukumar Bera\OneDrive\Documents\Personal Files\Microsoft Power BI\00_Data Files\04_AdventureWorks\AdventureWorks_Database.xlsx"), null, true),
+				    Territories_Table = Source{[Item="Territories",Kind="Table"]}[Data],
+				    #"Changed Type" = Table.TransformColumnTypes(Territories_Table,{{"SalesTerritoryKey", Int64.Type}, {"Region", type text}, {"Country", type text}, {"Group", type text}, {"RegionImage", type text}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+

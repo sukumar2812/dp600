@@ -1,0 +1,171 @@
+table Sales
+	lineageTag: 0b6768f0-e24e-43d1-9da4-09185cabc1ee
+
+	measure 'Distinct Customers' = DISTINCTCOUNT(Sales[CustomerKey])
+		formatString: 0
+		lineageTag: a7824838-b849-4930-9214-fb61374d3e53
+
+	measure 'Sales Amount' = SUM(Sales[SalesAmount])
+		lineageTag: 2b8ba789-252f-4028-bee5-08d7d05804fe
+
+		detailRowsDefinition = SUMMARIZECOLUMNS('Product'[Category],"@Sales",[Sales Amount],"@Volume",CALCULATE(DISTINCTCOUNT('Sales'[SalesOrderNumber])))
+
+	measure 'Sales PY' =
+			
+			CALCULATE(
+			    [Sales Amount],
+			    SAMEPERIODLASTYEAR('Calendar'[Date])
+			)
+		lineageTag: f681e51f-ba8b-4fef-bd57-43415fc5b6bd
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column ProductKey
+		dataType: int64
+		formatString: 0
+		lineageTag: 045885e1-673a-4efb-a427-403a678a5620
+		summarizeBy: none
+		sourceColumn: ProductKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column OrderDate
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: a33a367e-a891-4f25-a194-b496ebd96eae
+		summarizeBy: none
+		sourceColumn: OrderDate
+
+		annotation SummarizationSetBy = Automatic
+
+	column ShipDate
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 58142559-6b78-4458-83ee-c81d2bab8c81
+		summarizeBy: none
+		sourceColumn: ShipDate
+
+		annotation SummarizationSetBy = Automatic
+
+	column CustomerKey
+		dataType: int64
+		formatString: 0
+		lineageTag: 97683cb7-ffc8-48df-a9bb-8f9c6b2f4159
+		summarizeBy: none
+		sourceColumn: CustomerKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column PromotionKey
+		dataType: int64
+		formatString: 0
+		lineageTag: 8df840de-fd4d-4148-b81b-c5f1cf78db94
+		summarizeBy: count
+		sourceColumn: PromotionKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column SalesTerritoryKey
+		dataType: int64
+		formatString: 0
+		lineageTag: 537655e9-a8d5-4f58-b431-6aa8a25347aa
+		summarizeBy: none
+		sourceColumn: SalesTerritoryKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column SalesOrderNumber
+		dataType: string
+		lineageTag: a82159ea-ef85-4389-a7ff-be550dc60b85
+		summarizeBy: none
+		sourceColumn: SalesOrderNumber
+
+		annotation SummarizationSetBy = Automatic
+
+	column SalesOrderLineNumber
+		dataType: int64
+		formatString: 0
+		lineageTag: 7fde56fc-6792-46d6-a29a-c3bb94ef9655
+		summarizeBy: sum
+		sourceColumn: SalesOrderLineNumber
+
+		annotation SummarizationSetBy = Automatic
+
+	column OrderQuantity
+		dataType: int64
+		formatString: 0
+		lineageTag: db2e2eca-7059-4c91-bab3-ec7532c433de
+		summarizeBy: sum
+		sourceColumn: OrderQuantity
+
+		annotation SummarizationSetBy = Automatic
+
+	column UnitPrice
+		dataType: double
+		lineageTag: dcd06482-6a16-4151-a8c4-a96c4a149c1c
+		summarizeBy: sum
+		sourceColumn: UnitPrice
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column TotalProductCost
+		dataType: double
+		lineageTag: 15dc8c97-dd0b-447c-ab0f-d95a8b11c844
+		summarizeBy: sum
+		sourceColumn: TotalProductCost
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column SalesAmount
+		dataType: double
+		lineageTag: f637fdc9-4b0b-4f4c-adae-cebe753981bd
+		summarizeBy: sum
+		sourceColumn: SalesAmount
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column TaxAmt
+		dataType: double
+		lineageTag: 62f08ce7-bfb3-4125-a670-847e015f8ce4
+		summarizeBy: sum
+		sourceColumn: TaxAmt
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'SalesAmount - Virtual' = Sales[UnitPrice]*Sales[OrderQuantity]
+		lineageTag: 5594263e-c323-433c-bdfb-bdede91af36d
+		summarizeBy: sum
+		expressionContext: userContext
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'SalesAmount - Physical' = Sales[UnitPrice]*Sales[OrderQuantity]
+		lineageTag: 93974aaa-3689-4341-86d4-b4c81b338b67
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition Sales-2ecb9b43-436c-4eaf-8dba-d9924ac35ca0 = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Users\Sukumar Bera\OneDrive\Documents\Personal Files\Microsoft Power BI\00_Data Files\04_AdventureWorks\AdventureWorks_Database.xlsx"), null, true),
+				    Sales_Table = Source{[Item="Sales",Kind="Table"]}[Data],
+				    #"Changed Type" = Table.TransformColumnTypes(Sales_Table,{{"ProductKey", Int64.Type}, {"OrderDate", type datetime}, {"ShipDate", type datetime}, {"CustomerKey", Int64.Type}, {"PromotionKey", Int64.Type}, {"SalesTerritoryKey", Int64.Type}, {"SalesOrderNumber", type text}, {"SalesOrderLineNumber", Int64.Type}, {"OrderQuantity", Int64.Type}, {"UnitPrice", type number}, {"TotalProductCost", type number}, {"SalesAmount", type number}, {"TaxAmt", type number}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+

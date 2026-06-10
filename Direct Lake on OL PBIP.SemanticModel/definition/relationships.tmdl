@@ -1,0 +1,8 @@
+relationship 5a0c25d6-1bf8-a2a0-641e-8a053bf3495d
+	fromColumn: Sales.CustomerKey
+	toColumn: Territories.SalesTerritoryKey
+
+relationship 2d3575b3-c33b-25b4-e3f0-8afd1e9830cd
+	fromColumn: Sales.CustomerKey
+	toColumn: Customer.CustomerKey
+

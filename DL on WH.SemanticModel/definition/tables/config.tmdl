@@ -1,0 +1,29 @@
+table config
+	lineageTag: 994426a6-2b0b-40d4-9a9b-90bfebae24e4
+	sourceLineageTag: [dbo].[config]
+
+	column email
+		dataType: string
+		lineageTag: f36bce9a-d5e1-47ce-9a76-2cef8ffbf634
+		sourceLineageTag: email
+		summarizeBy: none
+		sourceColumn: email
+
+		annotation SummarizationSetBy = Automatic
+
+	column Country
+		dataType: string
+		lineageTag: 7e934fb2-e973-4b38-8aa6-f3c00a633a7f
+		sourceLineageTag: Country
+		summarizeBy: none
+		sourceColumn: Country
+
+		annotation SummarizationSetBy = Automatic
+
+	partition config = entity
+		mode: directLake
+		source
+			entityName: config
+			schemaName: dbo
+			expressionSource: 'DirectLake - WH01'
+

@@ -1,0 +1,175 @@
+table Date
+	lineageTag: 5d426546-e438-40b0-a8b8-f1cd5a0a8256
+	sourceLineageTag: [dbo].[Date]
+
+	column Date
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 8255bd31-174d-4f91-8285-2d00ddb34664
+		sourceLineageTag: Date
+		summarizeBy: none
+		sourceColumn: Date
+
+		annotation SummarizationSetBy = Automatic
+
+	column Year
+		dataType: int64
+		formatString: 0
+		lineageTag: 3fc27f59-e077-4a8c-8315-6ec93eb44a35
+		sourceLineageTag: Year
+		summarizeBy: none
+		sourceColumn: Year
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Year Quarter'
+		dataType: string
+		lineageTag: 9af2cc81-997b-45b0-9ed6-68562c7f9318
+		sourceLineageTag: Year Quarter
+		summarizeBy: none
+		sourceColumn: Year Quarter
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Year Quarter Number'
+		dataType: int64
+		formatString: 0
+		lineageTag: 29d38c56-272e-4ee5-94dd-835630b8aa3e
+		sourceLineageTag: Year Quarter Number
+		summarizeBy: none
+		sourceColumn: Year Quarter Number
+
+		annotation SummarizationSetBy = Automatic
+
+	column Quarter
+		dataType: string
+		lineageTag: b0cad7ef-ab97-454f-be7a-4b497fb2bdfa
+		sourceLineageTag: Quarter
+		summarizeBy: none
+		sourceColumn: Quarter
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Year Month'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 808b77fc-a028-402e-bb40-b73c503de69f
+		sourceLineageTag: Year Month
+		summarizeBy: none
+		sourceColumn: Year Month
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Year Month Short'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 954da147-a646-46bd-bdfc-56564b0cd0e7
+		sourceLineageTag: Year Month Short
+		summarizeBy: none
+		sourceColumn: Year Month Short
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Year Month Number'
+		dataType: int64
+		formatString: 0
+		lineageTag: 1bf84165-32ef-488b-b6b7-d4938ba032db
+		sourceLineageTag: Year Month Number
+		summarizeBy: none
+		sourceColumn: Year Month Number
+
+		annotation SummarizationSetBy = Automatic
+
+	column Month
+		dataType: string
+		lineageTag: 75e33246-7103-4b52-89a8-b0e8cd7a63cf
+		sourceLineageTag: Month
+		summarizeBy: none
+		sourceColumn: Month
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Month Short'
+		dataType: string
+		lineageTag: 8be3cd25-c1dd-40b1-a4e3-3d0904eac61b
+		sourceLineageTag: Month Short
+		summarizeBy: none
+		sourceColumn: Month Short
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Month Number'
+		dataType: int64
+		formatString: 0
+		lineageTag: b731e36d-199e-4e4f-b94c-3ccd289be25c
+		sourceLineageTag: Month Number
+		summarizeBy: none
+		sourceColumn: Month Number
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Day of Week'
+		dataType: string
+		lineageTag: 7c3ff5f8-da00-4b0b-a301-caffadbfac7b
+		sourceLineageTag: Day of Week
+		summarizeBy: none
+		sourceColumn: Day of Week
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Day of Week Short'
+		dataType: string
+		lineageTag: 18b3a061-df0d-4f2a-9e31-0369e43af3c5
+		sourceLineageTag: Day of Week Short
+		summarizeBy: none
+		sourceColumn: Day of Week Short
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Day of Week Number'
+		dataType: int64
+		formatString: 0
+		lineageTag: 28dbe521-8447-4d95-a730-76902b999697
+		sourceLineageTag: Day of Week Number
+		summarizeBy: none
+		sourceColumn: Day of Week Number
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Working Day'
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 8dd4d6d2-e87d-4b38-b83e-98aa4978b0d2
+		sourceLineageTag: Working Day
+		summarizeBy: none
+		sourceColumn: Working Day
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Working Day Number'
+		dataType: int64
+		formatString: 0
+		lineageTag: ece79e77-0c60-46cd-b8c4-a6acea0269a4
+		sourceLineageTag: Working Day Number
+		summarizeBy: none
+		sourceColumn: Working Day Number
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'End of Month'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 163a2bac-ff39-4c8d-a0be-ca4abfddb686
+		sourceLineageTag: End of Month
+		summarizeBy: none
+		sourceColumn: End of Month
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Date = entity
+		mode: directLake
+		source
+			entityName: Date
+			schemaName: dbo
+			expressionSource: 'DirectLake - WH01'
+

@@ -1,0 +1,25 @@
+table hello1
+	lineageTag: bbe22322-b1a6-4f9f-ba33-76b4f34abe5c
+
+	column 'New field'
+		lineageTag: fe5aae81-4571-41ef-8b96-7573af52a213
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [New field]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Another Field'
+		lineageTag: 4cc5e1d9-bbde-49cc-a844-422c178742a5
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Another Field]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition hello1 = calculated
+		mode: import
+		source = SELECTCOLUMNS({"Hey1","Hey2","World","Sukumar"},"New field",[Value],"Another Field","another value")
+
+	annotation PBI_Id = 75870d3a73bb464e90e843841fc75aef
+

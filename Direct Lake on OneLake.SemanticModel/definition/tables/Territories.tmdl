@@ -1,0 +1,56 @@
+table Territories
+	lineageTag: 0ebc3b6d-9e2d-407f-b974-17b2cc475041
+
+	column SalesTerritoryKey
+		dataType: int64
+		formatString: 0
+		lineageTag: 4e4ba191-a8f6-4809-80d9-16c16ab32a95
+		summarizeBy: none
+		sourceColumn: SalesTerritoryKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column Region
+		dataType: string
+		lineageTag: 4e9cd3c7-892e-4aa6-afa7-ac501277c4c2
+		summarizeBy: none
+		sourceColumn: Region
+
+		annotation SummarizationSetBy = Automatic
+
+	column Country
+		dataType: string
+		lineageTag: f06c2766-d47d-4e45-a3ee-84cba44c02fc
+		summarizeBy: none
+		sourceColumn: Country
+
+		annotation SummarizationSetBy = Automatic
+
+	column Group
+		dataType: string
+		lineageTag: 31970684-2ee8-4f90-a5f1-28216961d68d
+		summarizeBy: none
+		sourceColumn: Group
+
+		annotation SummarizationSetBy = Automatic
+
+	column RegionImage
+		dataType: string
+		lineageTag: 10b6ae22-c8ed-424e-9bc3-75416d4e97a9
+		summarizeBy: none
+		sourceColumn: RegionImage
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Territories = m
+		mode: import
+		source =
+				let
+				  Source = Excel.Workbook(File.Contents("C:\Users\Sukumar Bera\OneDrive\Documents\Personal Files\Microsoft Power BI\00_Data Files\04_AdventureWorks\AdventureWorks_Database.xlsx"), null, true),
+				  #"Navigation 1" = Source{[Item = "Territories", Kind = "Table"]}[Data],
+				  #"Changed column type" = Table.TransformColumnTypes(#"Navigation 1", {{"SalesTerritoryKey", Int64.Type}, {"Region", type text}, {"Country", type text}, {"Group", type text}, {"RegionImage", type text}}, "en-US")
+				in
+				  #"Changed column type"
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,44 @@
+{
+  "formatVersion": "202502",
+  "computeEngineSettings": {
+    "allowModernEvaluationEngine": true
+  },
+  "name": "DF01",
+  "queryGroups": [],
+  "documentLocale": "en-US",
+  "gatewayObjectId": "814479d9-f79e-4e50-b9b3-56ee8a421f8a",
+  "queriesMetadata": {
+    "Store": {
+      "queryId": "5b121626-ae36-42de-b007-b83a9beec2bf",
+      "queryName": "Store"
+    },
+    "Sales": {
+      "queryId": "3415b8f6-0da5-456f-9d73-c602bc71cded",
+      "queryName": "Sales"
+    },
+    "Product": {
+      "queryId": "d0a7b37f-5efc-487f-98e2-787692c44fa7",
+      "queryName": "Product"
+    },
+    "Date": {
+      "queryId": "48d9178a-e9f7-4e7e-883f-387cdc1f335a",
+      "queryName": "Date"
+    },
+    "Customer": {
+      "queryId": "b77d1db0-3204-4cf4-ad9e-0c56441ae637",
+      "queryName": "Customer"
+    }
+  },
+  "connections": [
+    {
+      "path": "C:\\Users\\Sukumar Bera\\Downloads\\Contoso Small.xlsx",
+      "kind": "File",
+      "connectionId": "{\"ClusterId\":\"814479d9-f79e-4e50-b9b3-56ee8a421f8a\",\"DatasourceId\":\"a2c54cc2-0bc6-4456-ac0d-dfb533c38e40\"}"
+    },
+    {
+      "path": "Warehouse",
+      "kind": "Warehouse",
+      "connectionId": "{\"ClusterId\":\"814479d9-f79e-4e50-b9b3-56ee8a421f8a\",\"DatasourceId\":\"7ef44760-a600-4e34-bbac-5c42f456cb5c\"}"
+    }
+  ]
+}

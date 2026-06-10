@@ -1,0 +1,26 @@
+[
+  {
+    "name": "Sales",
+    "path": "/Tables/dbo",
+    "target": {
+      "type": "OneLake",
+      "oneLake": {
+        "path": "Tables/Sales",
+        "itemId": "f5d07618-e8c7-4b23-a477-1171f8fc20f6",
+        "workspaceId": "26ec5295-bece-4e10-b634-827be0e2588a"
+      }
+    }
+  },
+  {
+    "name": "Customer",
+    "path": "/Tables/dbo",
+    "target": {
+      "type": "OneLake",
+      "oneLake": {
+        "path": "Tables/Customer",
+        "itemId": "f5d07618-e8c7-4b23-a477-1171f8fc20f6",
+        "workspaceId": "26ec5295-bece-4e10-b634-827be0e2588a"
+      }
+    }
+  }
+]

@@ -1,0 +1,25 @@
+function Top5BestProducts = ```
+		(Expr_To_Evaluate : expr) =>
+		 
+		VAR vYears=
+		CALCULATETABLE(
+		SUMMARIZE(Sales,'Calendar'[MonthYear]),ALLSELECTED())
+		
+		VAR vProdYears=
+		CALCULATETABLE(
+		GENERATE(
+		vYears,
+		TOPN(5,VALUES('Product'[ProductKey]),[Sales Amount],DESC)
+		),ALLSELECTED())
+		VAR vGroups=
+		FILTER(
+		GROUPBY(vProdYears,'Product'[ProductKey],"@Cnt",SUMX(CURRENTGROUP(),1)),
+		[@Cnt]=12
+		)
+		
+		RETURN
+		CALCULATE(
+		Expr_To_Evaluate,KEEPFILTERS(vGroups))
+		```
+	lineageTag: e3a0edf8-e715-4a33-a3d1-1dec2fbd2b5e
+

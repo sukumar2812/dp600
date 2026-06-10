@@ -1,0 +1,201 @@
+table Calendar
+	lineageTag: 6f2f2999-11b1-4b6d-89cd-83c2798570da
+	dataCategory: Time
+
+	measure 00_hello1 =
+			
+			VAR vMax=
+			CALCULATE(
+			    MAX('Calendar'[MonthNum]),
+			    REMOVEFILTERS('Calendar'[Month],'Calendar'[MonthNum])
+			)
+			VAR vResult=
+			CALCULATE(
+			    AVERAGEX(
+			        VALUES('Calendar'[Month]),
+			        [Sales Amount]
+			    ),
+			    REMOVEFILTERS('Calendar'[Month],'Calendar'[MonthNum])
+			)
+			RETURN
+			vResult
+		lineageTag: 0570da7c-e38f-4009-9907-f445ae847dd0
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 00_hello2 =
+			
+			VAR vMax=
+			CALCULATE(
+			    MAX('Calendar'[MonthNum]),
+			    REMOVEFILTERS('Calendar'[Month],'Calendar'[MonthNum])
+			)
+			VAR vResult=
+			CALCULATE(
+			    AVERAGEX(
+			        VALUES('Calendar'[Month]),
+			        [Sales Amount]
+			    ),
+			    REMOVEFILTERS('Calendar'[Month],'Calendar'[MonthNum])
+			)
+			RETURN
+			IF(vMax=MAX('Calendar'[MonthNum]),"Average : "&FORMAT(vResult,"#"))
+		lineageTag: 953c524f-2bd1-411e-a7c3-35549a7c7e45
+
+	column Date
+		dataType: dateTime
+		isKey
+		formatString: Short Date
+		lineageTag: 1ff89370-453e-4fdf-a7a5-387be41aed6d
+		summarizeBy: none
+		sourceColumn: Date
+
+		annotation SummarizationSetBy = Automatic
+
+	column DateKey
+		dataType: int64
+		formatString: 0
+		lineageTag: 1ba2f055-8e05-4d78-a9e3-f16f3b5cd491
+		summarizeBy: none
+		sourceColumn: DateKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column Year
+		dataType: int64
+		formatString: 0
+		lineageTag: ed62949e-b66b-4761-96e0-6006ee4de640
+		summarizeBy: none
+		sourceColumn: Year
+
+		annotation SummarizationSetBy = Automatic
+
+	column Quarter
+		dataType: string
+		lineageTag: cfe84132-8217-4f1c-8f86-ba81adcfbfa5
+		summarizeBy: none
+		sourceColumn: Quarter
+
+		annotation SummarizationSetBy = Automatic
+
+	column MonthNum
+		dataType: int64
+		formatString: 0
+		lineageTag: 967d10b6-9375-48f2-8f57-39ab75978e13
+		summarizeBy: none
+		sourceColumn: MonthNum
+
+		annotation SummarizationSetBy = Automatic
+
+	column Month
+		dataType: string
+		lineageTag: 7e69f8d3-20f2-4a27-a13e-273d76baf349
+		summarizeBy: none
+		sourceColumn: Month
+		sortByColumn: MonthNum
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	column FiscalYear
+		dataType: string
+		lineageTag: 4ea49861-567b-4b2d-97c8-3e5fa188ebf7
+		summarizeBy: none
+		sourceColumn: FiscalYear
+
+		annotation SummarizationSetBy = Automatic
+
+	column FiscalQuarter
+		dataType: string
+		lineageTag: 3aadbf06-33ce-4597-863b-31beef3217d1
+		summarizeBy: none
+		sourceColumn: FiscalQuarter
+
+		annotation SummarizationSetBy = Automatic
+
+	column FiscalMonthNum
+		dataType: int64
+		formatString: 0
+		lineageTag: a815abe6-512d-4ebc-9187-06685d8c6ed2
+		summarizeBy: none
+		sourceColumn: FiscalMonthNum
+
+		annotation SummarizationSetBy = Automatic
+
+	column FiscalMonth
+		dataType: string
+		lineageTag: 3cd752be-24ef-4b15-9d99-3debc5b6420c
+		summarizeBy: none
+		sourceColumn: FiscalMonth
+
+		annotation SummarizationSetBy = Automatic
+
+	column MonthYear
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 7e4a225a-30c0-4e27-93a7-f48f5a701c90
+		summarizeBy: none
+		sourceColumn: MonthYear
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column MonthYearLong
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 68ee10ec-3243-4cdd-b676-5e289721c27a
+		summarizeBy: none
+		sourceColumn: MonthYearLong
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column MonthYearNum
+		dataType: int64
+		formatString: 0
+		lineageTag: 7b939f99-694c-4c07-aed0-dcf6303c6e92
+		summarizeBy: none
+		sourceColumn: MonthYearNum
+
+		annotation SummarizationSetBy = Automatic
+
+	column WeekdayNum
+		dataType: int64
+		formatString: 0
+		lineageTag: 174a2c69-fa00-4bb0-9a48-ff6926e02699
+		summarizeBy: none
+		sourceColumn: WeekdayNum
+
+		annotation SummarizationSetBy = Automatic
+
+	column Weekday
+		dataType: string
+		lineageTag: f859ac31-c04c-4943-83dd-88b125128643
+		summarizeBy: none
+		sourceColumn: Weekday
+
+		annotation SummarizationSetBy = Automatic
+
+	column WeekdayWeekend
+		dataType: string
+		lineageTag: c1d8e262-ace0-47a9-a430-0893dbaa51a0
+		summarizeBy: none
+		sourceColumn: WeekdayWeekend
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Calendar-45ba0956-43d5-4e7d-85af-1199854b6ffe = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Users\Sukumar Bera\OneDrive\Documents\Personal Files\Microsoft Power BI\00_Data Files\04_AdventureWorks\AdventureWorks_Database.xlsx"), null, true),
+				    Calendar_Table = Source{[Item="Calendar",Kind="Table"]}[Data],
+				    #"Changed Type" = Table.TransformColumnTypes(Calendar_Table,{{"Date", type datetime}, {"DateKey", Int64.Type}, {"Year", Int64.Type}, {"Quarter", type text}, {"MonthNum", Int64.Type}, {"Month", type text}, {"FiscalYear", type text}, {"FiscalQuarter", type text}, {"FiscalMonthNum", Int64.Type}, {"FiscalMonth", type text}, {"MonthYear", type date}, {"MonthYearLong", type date}, {"MonthYearNum", Int64.Type}, {"WeekdayNum", Int64.Type}, {"Weekday", type text}, {"WeekdayWeekend", type text}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,29 @@
+{
+  "formatVersion": "202502",
+  "computeEngineSettings": {
+    "allowPartitionedCompute": true,
+    "allowModernEvaluationEngine": true
+  },
+  "name": "DF02",
+  "queryGroups": [],
+  "documentLocale": "en-US",
+  "queriesMetadata": {
+    "Query1": {
+      "queryId": "4972222d-7d7d-434f-8fc2-04fb27cf8341",
+      "queryName": "Query1"
+    },
+    "Query1_DataDestination": {
+      "queryId": "f3af935c-8751-409f-97d4-63fe97ece6b9",
+      "queryName": "Query1_DataDestination",
+      "isHidden": true,
+      "loadEnabled": false
+    }
+  },
+  "connections": [
+    {
+      "path": "Warehouse",
+      "kind": "Warehouse",
+      "connectionId": "{\"ClusterId\":\"28cd932a-d085-4de9-b0c7-1c69aa3d1f7b\",\"DatasourceId\":\"8186f79f-0d63-4915-8371-ed376948e1b0\"}"
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Report",
+    "displayName": "RLS Test on DL on SQL WH"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "982781db-e495-a6a9-4ca4-81839bcba0c8"
+  }
+}

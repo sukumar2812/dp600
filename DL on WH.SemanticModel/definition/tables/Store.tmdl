@@ -1,0 +1,97 @@
+table Store
+	lineageTag: de97b87e-d52f-44c5-90c6-63fdff63f261
+	sourceLineageTag: [dbo].[Store]
+
+	column StoreKey
+		dataType: int64
+		formatString: 0
+		lineageTag: ebe87560-876a-4b43-8a7c-aa6cbb10bc13
+		sourceLineageTag: StoreKey
+		summarizeBy: none
+		sourceColumn: StoreKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Store Code'
+		dataType: int64
+		formatString: 0
+		lineageTag: 32ba0b8f-2f3e-4468-9bf1-1a52f7420c1e
+		sourceLineageTag: Store Code
+		summarizeBy: none
+		sourceColumn: Store Code
+
+		annotation SummarizationSetBy = Automatic
+
+	column Country
+		dataType: string
+		lineageTag: 1aabef7d-4b6c-4bbc-b889-38d603c18b2f
+		sourceLineageTag: Country
+		summarizeBy: none
+		sourceColumn: Country
+
+		annotation SummarizationSetBy = Automatic
+
+	column State
+		dataType: string
+		lineageTag: e9f0564c-3c09-4fc4-bf04-d75d7fe0e065
+		sourceLineageTag: State
+		summarizeBy: none
+		sourceColumn: State
+
+		annotation SummarizationSetBy = Automatic
+
+	column Name
+		dataType: string
+		lineageTag: f79afc32-4080-4db9-8ab5-5daff14410c1
+		sourceLineageTag: Name
+		summarizeBy: none
+		sourceColumn: Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Square Meters'
+		dataType: int64
+		formatString: 0
+		lineageTag: 79cbf860-04d7-4055-844e-a2d99f2a73b7
+		sourceLineageTag: Square Meters
+		summarizeBy: none
+		sourceColumn: Square Meters
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Open Date'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 2635b0fb-7f2d-4d2e-9900-6f2d335c8994
+		sourceLineageTag: Open Date
+		summarizeBy: none
+		sourceColumn: Open Date
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Close Date'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: bfabddfd-7dfa-4dc1-a125-00bb9a4121b8
+		sourceLineageTag: Close Date
+		summarizeBy: none
+		sourceColumn: Close Date
+
+		annotation SummarizationSetBy = Automatic
+
+	column Status
+		dataType: string
+		lineageTag: baa93d90-c8ee-440e-8513-a01ba91babf6
+		sourceLineageTag: Status
+		summarizeBy: none
+		sourceColumn: Status
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Store = entity
+		mode: directLake
+		source
+			entityName: Store
+			schemaName: dbo
+			expressionSource: 'DirectLake - WH01'
+

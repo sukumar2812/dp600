@@ -1,0 +1,68 @@
+table 'Product demo'
+	lineageTag: 7a1bede6-5955-4a63-a364-8e30d8b8311b
+
+	column 'Product Key'
+		dataType: int64
+		formatString: 0
+		lineageTag: 5c868ff7-9fb2-4312-a38a-ddef634a45af
+		summarizeBy: none
+		sourceColumn: Product Key
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Product Name'
+		dataType: string
+		lineageTag: 195b99bb-5429-4eab-aedb-51498f299e55
+		summarizeBy: none
+		sourceColumn: Product Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Sub Category'
+		dataType: string
+		lineageTag: 9e8a1566-1859-48e5-8a8a-344d0d0626ec
+		summarizeBy: none
+		sourceColumn: Sub Category
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Category old'
+		dataType: string
+		lineageTag: d242c6fc-6bc4-482f-a086-0668dc2c3e63
+		summarizeBy: none
+		sourceColumn: Category old
+
+		annotation SummarizationSetBy = Automatic
+
+	column StandardCost
+		dataType: int64
+		formatString: 0
+		lineageTag: 2e5b217d-e9ce-48ae-b304-a9deb23b75a4
+		summarizeBy: sum
+		sourceColumn: StandardCost
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Product demo' = m
+		mode: import
+		source = ```
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Users\Sukumar Bera\OneDrive\Documents\Personal Files\Microsoft Power BI\00_Data Files\04_AdventureWorks\AdventureWorks_Database.xlsx"), null, true),
+				    Product_Table = Source{[Item="Product",Kind="Table"]}[Data],
+				    #"Changed Type" = Table.TransformColumnTypes(Product_Table,{{"ProductKey", Int64.Type}, {"ProductName", type text}, {"SubCategory", type any}, {"Category", type any}, {"StandardCost", type any}, {"Color", type text}, {"ListPrice", type any}, {"DaysToManufacture", Int64.Type}, {"ProductLine", type any}, {"ModelName", type any}, {"Photo", type text}, {"ProductDescription", type any}, {"StartDate", type datetime}}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Changed Type",{{"ProductName", "Product Name"}, {"SubCategory", "Sub Category"}}),
+				    #"Removed Other Columns" = Table.SelectColumns(#"Renamed Columns",{"ProductKey", "Product Name", "Sub Category", "Category", "StandardCost"}),
+				    #"Renamed Columns1" = Table.RenameColumns(#"Removed Other Columns",{{"ProductKey", "Product Key"}, {"Category", "Category new"}}),
+				    #"Changed Type1" = Table.TransformColumnTypes(#"Renamed Columns1",{{"StandardCost", Int64.Type}}),
+				    #"Renamed Columns2" = Table.RenameColumns(#"Changed Type1",
+				    {{ 
+				        "Category new", "Category old"
+				    }})
+				in
+				    #"Renamed Columns2"
+				```
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

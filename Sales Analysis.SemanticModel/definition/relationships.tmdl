@@ -1,0 +1,22 @@
+relationship 028cf70b-784c-48de-b83a-69d9ebf93690
+	fromColumn: Sales.ProductKey
+	toColumn: Product.ProductKey
+
+relationship 90513ea7-696b-46f0-8026-9ce87b9c168f
+	fromColumn: Sales.CustomerKey
+	toColumn: Customer.CustomerKey
+
+relationship 81b9f987-618d-4e85-bb89-0c96aada5d2a
+	fromColumn: Sales.SalesTerritoryKey
+	toColumn: Territories.SalesTerritoryKey
+
+relationship 939473a5-62e0-408c-b577-ef0e003c465a
+	fromColumn: Sales.OrderDate
+	toColumn: Calendar.Date
+
+relationship AutoDetected_346a4066-c93d-49a9-803b-71887854bff2
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: 'Product demo'.'Product Key'
+	toColumn: Product.ProductKey
+

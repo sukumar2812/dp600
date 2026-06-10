@@ -1,0 +1,173 @@
+table Product
+	lineageTag: d878b915-6d80-4338-97bd-20904128beb3
+
+	measure 01_hello = ```
+			
+			 
+			VAR vYears=
+			CALCULATETABLE(
+			SUMMARIZE(Sales,'Calendar'[MonthYear]),ALLSELECTED())
+			
+			VAR vProdYears=
+			CALCULATETABLE(
+			GENERATE(
+			vYears,
+			TOPN(5,VALUES('Product'[ProductKey]),[Sales Amount],DESC)
+			),ALLSELECTED())
+			VAR vGroups=
+			FILTER(
+			GROUPBY(vProdYears,'Product'[ProductKey],"@Cnt",SUMX(CURRENTGROUP(),1)),
+			[@Cnt]=12
+			)
+			
+			RETURN
+			CALCULATE(
+			COUNTROWS('Product'),KEEPFILTERS(vGroups))
+			```
+		formatString: 0
+		lineageTag: 84630b40-6862-4836-bdf1-22be81df1f46
+
+	measure 02_Hello = Top5BestProducts(COUNTROWS('Product'))
+		formatString: 0
+		lineageTag: 4368e023-42fc-447c-9705-b1fd32d60dac
+
+	measure 03_Hello = Top5BestProducts(NAMEOF(Parameter[Parameter Fields]))
+		lineageTag: ad911555-424f-491b-b728-0eadb9e67500
+
+	column ProductKey
+		dataType: int64
+		formatString: 0
+		lineageTag: 879c0e03-fbbe-4622-b9cc-e4f9ce65d7eb
+		summarizeBy: none
+		sourceColumn: ProductKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column ProductName
+		dataType: string
+		lineageTag: 180c0e6e-f43a-47b7-9971-94586f046081
+		summarizeBy: none
+		sourceColumn: ProductName
+
+		annotation SummarizationSetBy = Automatic
+
+	column SubCategory
+		dataType: string
+		lineageTag: 4c983f83-b9cf-4e1b-bdbb-27690da20755
+		summarizeBy: none
+		sourceColumn: SubCategory
+
+		annotation SummarizationSetBy = Automatic
+
+	column Category
+		dataType: string
+		lineageTag: 31c05961-ba7d-428f-967f-d027244a4da3
+		summarizeBy: none
+		sourceColumn: Category
+
+		annotation SummarizationSetBy = Automatic
+
+	column StandardCost
+		dataType: string
+		lineageTag: 15b7de00-81f3-4bc2-9ee4-48dee288e912
+		summarizeBy: none
+		sourceColumn: StandardCost
+
+		annotation SummarizationSetBy = Automatic
+
+	column Color
+		dataType: string
+		lineageTag: fa98ceb7-2987-48a7-be91-8cbcecf3988e
+		summarizeBy: none
+		sourceColumn: Color
+
+		annotation SummarizationSetBy = Automatic
+
+	column ListPrice
+		dataType: string
+		lineageTag: 10b52e9a-e164-437c-8541-bf4ff070e40a
+		summarizeBy: none
+		sourceColumn: ListPrice
+
+		annotation SummarizationSetBy = Automatic
+
+	column DaysToManufacture
+		dataType: int64
+		formatString: 0
+		lineageTag: 9c929249-6669-4053-bf5f-a27e9ac1eb07
+		summarizeBy: none
+		sourceColumn: DaysToManufacture
+
+		annotation SummarizationSetBy = Automatic
+
+	column ProductLine
+		dataType: string
+		lineageTag: d27f63d1-0d98-47a8-b709-2d545dacd204
+		summarizeBy: none
+		sourceColumn: ProductLine
+
+		annotation SummarizationSetBy = Automatic
+
+	column ModelName
+		dataType: string
+		lineageTag: 0dd88f83-b1f5-485f-8ade-a30c6e78f123
+		summarizeBy: none
+		sourceColumn: ModelName
+
+		annotation SummarizationSetBy = Automatic
+
+	column Photo
+		dataType: string
+		lineageTag: e21dc8ff-a550-40be-b654-0be21ab74543
+		summarizeBy: none
+		sourceColumn: Photo
+
+		annotation SummarizationSetBy = Automatic
+
+	column ProductDescription
+		dataType: string
+		lineageTag: 72a7b683-89ff-41dc-8214-1beb41a28f51
+		summarizeBy: none
+		sourceColumn: ProductDescription
+
+		annotation SummarizationSetBy = Automatic
+
+	column StartDate
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: c4c56d82-0c9d-45cb-bd4a-d84486cbeb02
+		summarizeBy: none
+		sourceColumn: StartDate
+
+		annotation SummarizationSetBy = Automatic
+
+	column Hello = ```
+			
+			VAR vLang=LEFT(USERCULTURE(),2)
+			RETURN
+			SWITCH(
+			    vLang,
+			    "en",'Product'[Category],
+			    "fr",'Product'[SubCategory],
+			    'Product'[ProductName]
+			)
+			
+			```
+		lineageTag: 35228a08-5600-4729-8434-698cbd4ff274
+		summarizeBy: none
+		expressionContext: userContext
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Product-c879a0ac-63fe-4bd7-8489-81c5fd2d2827 = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Users\Sukumar Bera\OneDrive\Documents\Personal Files\Microsoft Power BI\00_Data Files\04_AdventureWorks\AdventureWorks_Database.xlsx"), null, true),
+				    Product_Table = Source{[Item="Product",Kind="Table"]}[Data],
+				    #"Changed Type" = Table.TransformColumnTypes(Product_Table,{{"ProductKey", Int64.Type}, {"ProductName", type text}, {"SubCategory", type any}, {"Category", type any}, {"StandardCost", type any}, {"Color", type text}, {"ListPrice", type any}, {"DaysToManufacture", Int64.Type}, {"ProductLine", type any}, {"ModelName", type any}, {"Photo", type text}, {"ProductDescription", type any}, {"StartDate", type datetime}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+

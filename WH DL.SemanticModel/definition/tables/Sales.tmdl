@@ -1,0 +1,143 @@
+table Sales
+	lineageTag: 4a9576cc-a7d7-4074-8de4-67ac884ea02d
+	sourceLineageTag: [dbo].[Sales]
+
+	column 'Order Number'
+		dataType: int64
+		formatString: 0
+		lineageTag: 117d9f9e-a956-415d-adab-55a9227c4d0d
+		sourceLineageTag: Order Number
+		summarizeBy: sum
+		sourceColumn: Order Number
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Line Number'
+		dataType: int64
+		formatString: 0
+		lineageTag: 365b4a0b-ca3d-4174-ade2-ba2c317e045a
+		sourceLineageTag: Line Number
+		summarizeBy: sum
+		sourceColumn: Line Number
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Order Date'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 83685b3e-b2c1-4f63-95a2-2876558ab32e
+		sourceLineageTag: Order Date
+		summarizeBy: none
+		sourceColumn: Order Date
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Delivery Date'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: dcfeede1-c4a1-4809-8aa1-799d258af05c
+		sourceLineageTag: Delivery Date
+		summarizeBy: none
+		sourceColumn: Delivery Date
+
+		annotation SummarizationSetBy = Automatic
+
+	column CustomerKey
+		dataType: int64
+		formatString: 0
+		lineageTag: db1bc9b7-2220-4581-ab8a-40cdc9b95612
+		sourceLineageTag: CustomerKey
+		summarizeBy: count
+		sourceColumn: CustomerKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column StoreKey
+		dataType: int64
+		formatString: 0
+		lineageTag: 992bf7ed-85a8-4d6e-8ed4-3087148d5565
+		sourceLineageTag: StoreKey
+		summarizeBy: count
+		sourceColumn: StoreKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column ProductKey
+		dataType: int64
+		formatString: 0
+		lineageTag: ac0df9fd-e50a-4153-85f9-3d9fc2be3b9f
+		sourceLineageTag: ProductKey
+		summarizeBy: count
+		sourceColumn: ProductKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column Quantity
+		dataType: int64
+		formatString: 0
+		lineageTag: de2fc5df-68f6-468d-b171-e6e6805d8562
+		sourceLineageTag: Quantity
+		summarizeBy: sum
+		sourceColumn: Quantity
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Unit Price'
+		dataType: double
+		lineageTag: f879e1c1-97c3-4392-b57a-d9ca16b16eac
+		sourceLineageTag: Unit Price
+		summarizeBy: sum
+		sourceColumn: Unit Price
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Net Price'
+		dataType: double
+		lineageTag: 24f3dbfc-0f7e-4161-be2b-a110ea3f4c01
+		sourceLineageTag: Net Price
+		summarizeBy: sum
+		sourceColumn: Net Price
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Unit Cost'
+		dataType: double
+		lineageTag: 2eb9599e-a3ae-40b9-a035-b69bce311077
+		sourceLineageTag: Unit Cost
+		summarizeBy: sum
+		sourceColumn: Unit Cost
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Currency Code'
+		dataType: string
+		lineageTag: 46aea370-c5a2-4aa0-97c2-89f3d1ccb4de
+		sourceLineageTag: Currency Code
+		summarizeBy: none
+		sourceColumn: Currency Code
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Exchange Rate'
+		dataType: int64
+		formatString: 0
+		lineageTag: cb4112d9-9813-4d6e-9a33-a6fb5b3dcf87
+		sourceLineageTag: Exchange Rate
+		summarizeBy: sum
+		sourceColumn: Exchange Rate
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Sales = entity
+		mode: directLake
+		source
+			entityName: Sales
+			schemaName: dbo
+			expressionSource: 'DirectLake - WH01'
+

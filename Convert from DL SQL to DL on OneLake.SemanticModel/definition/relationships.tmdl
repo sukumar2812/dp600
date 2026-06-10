@@ -1,0 +1,4 @@
+relationship eae1aecc-0e3e-d204-38e3-f0326d60b7ac
+	fromColumn: Sales.CustomerKey
+	toColumn: Customer.CustomerKey
+

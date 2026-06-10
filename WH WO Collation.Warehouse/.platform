@@ -1,0 +1,12 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Warehouse",
+    "displayName": "WH WO Collation",
+    "description": "Case insensitive WH"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "045f40b4-a43e-8bbb-47a6-442c18b7657a"
+  }
+}

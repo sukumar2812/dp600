@@ -1,0 +1,7 @@
+role RLS
+	modelPermission: read
+
+	tablePermission Config = [iseligible]>=1
+
+	annotation PBI_Id = b1feec5571a24da68a9974b35160b6ae
+

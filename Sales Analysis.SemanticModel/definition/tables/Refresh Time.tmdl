@@ -1,0 +1,40 @@
+table 'Refresh Time'
+	lineageTag: d02bf666-3a29-4135-96c7-979ab35a8620
+
+	measure 'Last Refreshed On' = MAX('Refresh Time'[Refresh Time])
+		formatString: General Date
+		lineageTag: 4f7c6e0d-9f24-4014-9c12-58d7f2107361
+
+	column 'Refresh Time'
+		dataType: string
+		lineageTag: 5982e990-4c9e-4bd1-add2-9ca511ca0edd
+		summarizeBy: none
+		sourceColumn: Refresh Time
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Refresh Time Formatted'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 321a7cdb-fa58-462e-8b45-fa2cfe225300
+		summarizeBy: none
+		sourceColumn: Refresh Time Formatted
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Refresh Time' = m
+		mode: import
+		source =
+				let
+				    Source = Number.From(DateTime.FixedLocalNow()),
+				    #"Converted to Table" = #table(1, {{Source}}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Converted to Table",{{"Column1", "Refresh Time"}}),
+				    #"Added Custom" = Table.AddColumn(#"Renamed Columns", "Refresh Time Formatted", each [Refresh Time]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Added Custom",{{"Refresh Time Formatted", type datetime}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

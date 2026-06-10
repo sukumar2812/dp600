@@ -1,0 +1,33 @@
+table config
+	lineageTag: 775abdd7-335e-40ae-b1ba-ca35eb6ba210
+	sourceLineageTag: [dbo].[config]
+
+	column email
+		dataType: string
+		sourceProviderType: varchar(50)
+		lineageTag: d4698a68-0e9a-475c-92b0-89a83dc5babe
+		sourceLineageTag: email
+		summarizeBy: none
+		sourceColumn: email
+
+		annotation SummarizationSetBy = Automatic
+
+	column Country
+		dataType: string
+		sourceProviderType: varchar(100)
+		lineageTag: a78a5a71-e58a-40e3-9812-8956981a3ffa
+		sourceLineageTag: Country
+		summarizeBy: none
+		sourceColumn: Country
+
+		annotation SummarizationSetBy = Automatic
+
+	partition config = entity
+		mode: directLake
+		source
+			entityName: config
+			schemaName: dbo
+			expressionSource: DatabaseQuery
+
+	annotation PBI_ResultType = Table
+

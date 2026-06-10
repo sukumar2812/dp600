@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "SemanticModel",
+    "displayName": "Direct Lake on SQL"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "db9f9dd9-71a1-ad6a-40ae-7480ed35034d"
+  }
+}

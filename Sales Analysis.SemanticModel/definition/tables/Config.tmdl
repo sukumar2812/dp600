@@ -1,0 +1,60 @@
+table Config
+	lineageTag: bb1836f7-1df2-45af-bcbc-3d805cbf1a3a
+
+	measure iseligible =
+			
+			VAR vEID= LOOKUPVALUE(Config[EID],Config[ENAME],USERNAME())
+			VAR vEligible=
+			SUMX(
+			    Config,
+			    IF(PATHCONTAINS(Config[hier],vEID),1)
+			)
+			RETURN vEligible
+		formatString: 0
+		lineageTag: f46071a9-95e9-402d-831c-b70934bb63e9
+
+	column EID
+		dataType: int64
+		formatString: 0
+		lineageTag: e8d4ae9f-063b-48c1-b243-a03e27fe01eb
+		summarizeBy: none
+		sourceColumn: EID
+
+		annotation SummarizationSetBy = User
+
+	column MID
+		dataType: int64
+		formatString: 0
+		lineageTag: baedd0fb-c638-4cf0-ace2-d953bc1af3bb
+		summarizeBy: none
+		sourceColumn: MID
+
+		annotation SummarizationSetBy = User
+
+	column ENAME
+		dataType: string
+		lineageTag: 3f570542-c0ff-48c1-805a-eb5e61a7986d
+		summarizeBy: none
+		sourceColumn: ENAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column hier = path(Config[EID],Config[MID])
+		lineageTag: 0b20f324-b8c1-4289-ba94-0c75c5141204
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Config = m
+		mode: import
+		source =
+				let
+				    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i45WMlTSUQKi4NLs0tzEIqVYnWglIyAfJByUWZxZkggWMgZyQcLBGUWpqXmZ2UDRWAA=", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [EID = _t, MID = _t, ENAME = _t]),
+				    #"Changed Type" = Table.TransformColumnTypes(Source,{{"EID", Int64.Type}, {"MID", Int64.Type}, {"ENAME", type text}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

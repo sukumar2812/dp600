@@ -1,0 +1,80 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.8.0/schema.json",
+  "name": "52e85e41ecf04ae12be0",
+  "position": {
+    "x": 550.2439024390244,
+    "y": 163.90243902439025,
+    "z": 3000,
+    "height": 319.02439024390242,
+    "width": 591.219512195122,
+    "tabOrder": 3000
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Config"
+                    }
+                  },
+                  "Property": "EID"
+                }
+              },
+              "queryRef": "Config.EID",
+              "nativeQueryRef": "EID"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Config"
+                    }
+                  },
+                  "Property": "ENAME"
+                }
+              },
+              "queryRef": "Config.ENAME",
+              "nativeQueryRef": "ENAME"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Config"
+                    }
+                  },
+                  "Property": "hier"
+                }
+              },
+              "queryRef": "Config.hier",
+              "nativeQueryRef": "hier"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Config"
+                    }
+                  },
+                  "Property": "iseligible"
+                }
+              },
+              "queryRef": "Config.iseligible",
+              "nativeQueryRef": "iseligible"
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true
+  }
+}
